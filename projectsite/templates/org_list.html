@@ -10,6 +10,28 @@
                             <div class="card-category">Page Subtitle</div>
 
                         </div>
+                        <br>
+
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <form class="navbar-form nav-search" action="" method="get">
+                                    <div class="input-group">
+                                        <input type="text" name="q" placeholder="Search..." class="form-control">
+                                        <div class="input-group-append">
+                                            <span class="input-group-text">
+                                                <i class="la la-search search-icon"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="col-md-6 text-md-right mt-3 mt-md-0">
+                                <a href="{% url 'organization-add' %}" class="btn btn-success btn-rounded">
+                                    Add Organization
+                                </a>
+                            </div>
+                        </div>
                         <div class="card-body">
                             <table class="table table-striped mt-3">
                                 <thead>
