@@ -3,7 +3,7 @@
 <html>
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-	<title>{% block title %}PSUSphere{% endblock %}</title>
+    <title>{% block title %}PSUSphere{% endblock %}</title>
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i">
@@ -104,11 +104,11 @@
 							</ul>
 						</li>
 						<li class="nav-item dropdown">
-							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="assets/img/profile.jpg" alt="user-img" width="36" class="img-circle"><span >Hizrian</span></span> </a>
+							<a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false"> <img src="{% static 'img/profile.jpg' %}" alt="user-img" width="36" class="img-circle"> <span >Hizrian</span></span> </a>
 							<ul class="dropdown-menu dropdown-user">
 								<li>
 									<div class="user-box">
-										<div class="u-img"><img src="assets/img/profile.jpg" alt="user"></div>
+										<div class="u-img"><img src="{% static 'img/profile.jpg' %}" alt="user"></div>
 										<div class="u-text">
 											<h4>Hizrian</h4>
 											<p class="text-muted">hello@themekita.com</p><a href="profile.html" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
@@ -133,7 +133,7 @@
 				<div class="scrollbar-inner sidebar-wrapper">
 					<div class="user">
 						<div class="photo">
-							<img src="assets/img/profile.jpg">
+							<img src="{% static 'img/profile.jpg' %}">
 						</div>
 						<div class="info">
 							<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
@@ -168,7 +168,7 @@
 					</div>
 					<ul class="nav">
 						<li class="nav-item">
-							<a href="index.html">
+							<a href="{% url 'home' %}">
 								<i class="la la-dashboard"></i>
 								<p>Dashboard</p>
 							</a>
@@ -180,36 +180,36 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="forms.html">
+							<a href="{% url 'orgmember-list' %}">
 								<i class="la la-keyboard-o"></i>
 								<p>Org. Members</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="tables.html">
+							<a href="{% url 'student-list' %}">
 								<i class="la la-th"></i>
 								<p>Student</p>
 							</a>
 						</li>
 						<li class="nav-item">
-							<a href="notifications.html">
+							<a href="{% url 'college-list' %}">
 								<i class="la la-bell"></i>
 								<p>College</p>
 							</a>
 						</li>
 						<li class="nav-item active">
-							<a href="typography.html">
+								<a href="{% url 'program-list' %}">
 								<i class="la la-font"></i>
-								<p>Typography</p>
-								<span class="badge badge-danger">25</span>
+								<p>Program</p>
 							</a>
 						</li>
-					</ul>
+					</ul>   
 				</div>
 			</div>
 			<div class="main-panel">
-                {% block content %}
+				{% block content %}
                 {% endblock %}
+					
 				<footer class="footer">
 					<div class="container-fluid">
 						<nav class="pull-left">
