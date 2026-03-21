@@ -29,7 +29,18 @@ DEBUG = True
 ALLOWED_HOSTS = ['psuspherelc.pythonanywhere.com', '127.0.0.1']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+LOGIN_URL = '/accounts/login/' # where @login_required will send users
+LOGIN_REDIRECT_URL = '/' # where to go after successful login
+LOGOUT_REDIRECT_URL = '/accounts/login/' # after logout, go back to login
+ACCOUNT_LOGOUT_REDIRECT_URL = '/' # where to redirect after logout
+ACCOUNT_LOGOUT_ON_GET = True # logout immediately on GET
+ACCOUNT_LOGIN_METHODS = {"username", "email"} # allow login with username OR email
+ACCOUNT_SIGNUP_FIELDS = [
+"username*",
+"email*",
+"password1*",
+"password2*",
+]
 # Application definition
 
 LOGIN_URL = '/accounts/login/' # where @login_required will send users
