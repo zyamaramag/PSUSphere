@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Django
+db.sqlite3
+/staticfiles/
+
+# Env
+.env
+.venv/
+psusenv/
+
+# OS
+.DS_Store

@@ -26,42 +26,28 @@ SECRET_KEY = 'django-insecure-7p5okbmdyggibjak+nspfsou5qyt&ua6_ia1r3rg_z51+5#y@v
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-if "pythonanywhere" in socket.gethostname():
-    SITE_ID = 2 # production site (psusphere.pythonanywhere.com)
-else:
-    SITE_ID = 1 # local site (127.0.0.1:8000)
 
+# Email verification
+ACCOUNT_EMAIL_VERIFICATION = "none"
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-ALLOWED_HOSTS = ['psuspherelc.pythonanywhere.com', '127.0.0.1']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'psusphere.pythonanywhere.com']
+# Allauth settings (new API)
+ACCOUNT_LOGIN_METHODS = {'email', 'username'}  # allow login with username OR email
+ACCOUNT_SIGNUP_FIELDS = ['username*', 'email*', 'password1*', 'password2*']
 
+# Django settings
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'charleszya.pythonanywhere.com']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-LOGIN_URL = '/accounts/login/' # where @login_required will send users
-LOGIN_REDIRECT_URL = '/' # where to go after successful login
-LOGOUT_REDIRECT_URL = '/accounts/login/' # after logout, go back to login
-ACCOUNT_LOGOUT_REDIRECT_URL = '/' # where to redirect after logout
-ACCOUNT_LOGOUT_ON_GET = True # logout immediately on GET
-ACCOUNT_LOGIN_METHODS = {"username", "email"} # allow login with username OR email
-ACCOUNT_SIGNUP_FIELDS = [
-"username*",
-"email*",
-"password1*",
-"password2*",
-]
+LOGIN_URL = '/accounts/login/'  # where @login_required will send users
+LOGIN_REDIRECT_URL = '/'  # where to go after successful login
+LOGOUT_REDIRECT_URL = '/accounts/login/'  # after logout, go back to login
+
+# Allauth redirects
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'  # where to redirect after logout
+ACCOUNT_LOGOUT_ON_GET = True  # logout immediately on GET
+
 # Application definition
 
-LOGIN_URL = '/accounts/login/' # where @login_required will send users
-LOGIN_REDIRECT_URL = '/' # where to go after successful login
-LOGOUT_REDIRECT_URL = '/accounts/login/' # after logout, go back to login
-ACCOUNT_LOGOUT_REDIRECT_URL = '/' # where to redirect after logout
-ACCOUNT_LOGOUT_ON_GET = True # logout immediately on GET
-ACCOUNT_LOGIN_METHODS = {"username", "email"} # allow login with username OR email
-ACCOUNT_SIGNUP_FIELDS = [
-"username*",
-"email*",
-"password1*",
-"password2*",
-]
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,14 +62,20 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
-]
+    ]
 
-SITE_ID = 1
+if "pythonanywhere" in socket.gethostname():
+    SITE_ID = 2  # production site (psusphere.pythonanywhere.com)
+else:
+    SITE_ID = 1 # local site (127.0.0.1:8000)
+
+
 AUTHENTICATION_BACKENDS = [
-'django.contrib.auth.backends.ModelBackend',
-'allauth.account.auth_backends.AuthenticationBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +83,6 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -103,12 +94,12 @@ ROOT_URLCONF = 'projectsite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [BASE_DIR / 'templates'],  # good
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                "django.template.context_processors.debug",
-                'django.template.context_processors.request',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',  # required by allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
@@ -164,7 +155,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = (
     BASE_DIR / 'static',
